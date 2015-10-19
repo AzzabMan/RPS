@@ -18,27 +18,25 @@ public class Computer extends Player {
 
 		if (previousWeapon != null) {
 			
-			if(roundNumber > 0) { // more than three rounds
-				
-			} else {
-				if(roundNumber > 0) { // more than one rounds
-					
-					// if the AI wins, it will play the same game // this can happen only two successive times
-					if (score.get(roundNumber-1)) {
-						strategy = previousWeapon.ordinal();
-					} else {
-						// if the AI loses, it will play different weapon in the order ROCK, PAPER, SCISSORS
-						switch (previousWeapon) {
-						case ROCK:
-							strategy = Weapon.PAPER.ordinal();
-							break;
-						case PAPER:
-							strategy = Weapon.SCISSORS.ordinal();			
-							break;
-						case SCISSORS:
-							strategy = Weapon.ROCK.ordinal();		
-							break;
-						}				
+			if (roundNumber > 0) { // more than one rounds
+
+				// if the AI wins, it will play the same game // this can happen
+				// only two successive times
+				if (score.get(roundNumber - 1)) {
+					strategy = previousWeapon.ordinal();
+				} else {
+					// if the AI loses, it will play different weapon in the
+					// order ROCK, PAPER, SCISSORS
+					switch (previousWeapon) {
+					case ROCK:
+						strategy = Weapon.PAPER.ordinal();
+						break;
+					case PAPER:
+						strategy = Weapon.SCISSORS.ordinal();
+						break;
+					case SCISSORS:
+						strategy = Weapon.ROCK.ordinal();
+						break;
 					}
 				}
 			}
