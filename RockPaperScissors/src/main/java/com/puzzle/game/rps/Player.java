@@ -1,30 +1,17 @@
 package com.puzzle.game.rps;
 
+import java.util.BitSet;
 import java.util.Scanner;
 
 public abstract class Player {
 	
 	protected Scanner inputScanner;
-	private int numberWins;
-	private int numberLosses;
-	private int numberTies;
 	protected String name;
-	protected Weapon previousRound;
-	protected byte previousScore;
-	
-	public abstract Weapon playRound();
-	
-	public int incrementLosses() {
-		return ++numberLosses;
-	}
+	protected Weapon previousWeapon;
+	/* this attribute will store the result of all games on bit format */
+	protected BitSet score;
 
-	public int incrementWins() {
-		return ++numberWins;
-	}
-
-	public int incrementTies() {
-		return ++numberTies;
-	}
+	public abstract Weapon playRound(int roundNumber);
 	
 	/**
 	 * @return the name
@@ -34,45 +21,24 @@ public abstract class Player {
 	}
 
 	/**
-	 * @return the numberWins
+	 * @param previousRound the previousWeapon to set
 	 */
-	public int getNumberWins() {
-		return numberWins;
+	public void setPreviousWeapon(Weapon previousWeapon) {
+		this.previousWeapon = previousWeapon;
 	}
 
 	/**
-	 * @return the numberLosses
+	 * @return the score
 	 */
-	public int getNumberLosses() {
-		return numberLosses;
+	public BitSet getScore() {
+		return score;
 	}
 
 	/**
-	 * @return the numberTies
+	 * @param score the score to set
 	 */
-	public int getNumberTies() {
-		return numberTies;
-	}
-	
-	/**
-	 * @param previousRound the previousRound to set
-	 */
-	public void setPreviousRound(Weapon previousRound) {
-		this.previousRound = previousRound;
-	}
-
-	/**
-	 * @param previousScore the previousScore to set
-	 */
-	public void setPreviousScore(byte previousScore) {
-		this.previousScore = previousScore;
-	}
-	
-	/**
-	 * @return the previousScore
-	 */
-	public byte getPreviousScore() {
-		return previousScore;
+	public void setScore(BitSet score) {
+		this.score = score;
 	}
 
 	/**
@@ -81,7 +47,7 @@ public abstract class Player {
 	 */
 	public boolean askForNewRound() {
 		char result = 'N';
-	    System.out.print("\nWould you like to play another round ? ");
+	    System.out.print("\nWould you like to play another round: Yes (y), No (n) ? ");
 		String input = inputScanner.nextLine();
 		if (input != null && input.length() > 0) {
 			result = input.toUpperCase().charAt(0);

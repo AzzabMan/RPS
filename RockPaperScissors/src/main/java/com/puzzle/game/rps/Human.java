@@ -1,5 +1,6 @@
 package com.puzzle.game.rps;
 
+import java.util.BitSet;
 import java.util.Scanner;
 
 public class Human extends Player {
@@ -7,10 +8,11 @@ public class Human extends Player {
 	public Human(String name) {
 		super.inputScanner = new Scanner(System.in);
 		super.name = name;
+		super.score = new BitSet();
 	}
 
 	@Override
-	public Weapon playRound() {
+	public Weapon playRound(int roundNumber) {
 		System.out.println("\nPlease make a choice: Rock (r), Paper (p), or Scissors (s) ?");
 
 		// read user input from console
@@ -26,10 +28,10 @@ public class Human extends Player {
 				case 'S':
 					return Weapon.SCISSORS;
 				default:
-					playRound();
+					playRound(roundNumber);
 				}
 			}
 		}
-		return playRound();
+		return playRound(roundNumber);
 	}
 }
